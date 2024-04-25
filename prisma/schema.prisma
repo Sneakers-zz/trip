@@ -71,3 +71,69 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+model Crop {
+  id                 String        @id @default(uuid())
+  name               String?
+  slug               String?
+  binomialName       String?        @map("binomial_name")
+  description        String?
+  sunRequirements    String?       @map("sun_requirements")
+  sowingMethod       String?       @map("sowing_method")
+  spread             Int?
+  rowSpacing         Int?          @map("row_spacing")
+  height             Int?
+  processingPictures Int?           @map("processing_pictures")
+  guidesCount        Int?           @map("guides_count")
+  mainImagePath      String?        @map("main_image_path")
+  taxon              String?
+  tagsArray          Json?         @map("tags_array") // Assuming your DB supports JSON.
+  growingDegreeDays  Int?          @map("growing_degree_days")
+  svgIcon            String ?       @map("svg_icon")
+  pictures           Picture[]
+  companions         Companion[]   @relation("CropCompanions")
+  commonNames        CommonName[]  // Explicitly define the relation to CommonName
+}
+
+model CommonName {
+  id     String @id @default(uuid())
+  name   String
+  cropId String
+  Crop   Crop   @relation(fields: [cropId], references: [id]) // Ensure this matches the Crop model's reference
+}
+
+model Picture {
+  id     String @id @default(uuid())
+  cropId String
+  Crop   Crop   @relation(fields: [cropId], references: [id])
+}
+
+model Companion {
+  id     String   @id @default(uuid())
+  cropId String
+  Crop   Crop[]   @relation("CropCompanions")
+}
+
+model Plant {
+  id             String   @id
+  image          String
+  name           String
+  botanicalName  String
+  sun            String?  // Made optional
+  spread         Int
+  rowSpace       Int
+  details        String
+}
+
+model SensorData {
+  id        Int      @id @default(autoincrement())
+  chipId    Int
+  water1    Int
+  water2    Int
+  water3    Int
+  water4    Int
+  tempC     Float
+  tempF     Float
+  uvLight   Float
+  createdAt DateTime @default(now())
+}

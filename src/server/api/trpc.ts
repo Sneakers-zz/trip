@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+//~/server/api/trpc
 /**
  * YOU PROBABLY DON'T NEED TO EDIT THIS FILE, UNLESS:
  * 1. You want to modify request context (see Part 1).
@@ -10,7 +12,6 @@
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
-
 import { getServerAuthSession } from "~/server/auth";
 import { db } from "~/server/db";
 
@@ -86,6 +87,11 @@ export const createTRPCRouter = t.router;
  * are logged in.
  */
 export const publicProcedure = t.procedure;
+/**
+ * @link https://trpc.io/docs/v11/merging-routers
+ */
+
+export const mergeRouters = t.mergeRouters;
 
 /**
  * Protected (authenticated) procedure
@@ -106,3 +112,13 @@ export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
     },
   });
 });
+
+
+/**
+export const createContext = () => {
+  // Assuming you have some context setup like db access, session management, etc.
+  return {
+    // your context fields
+  };
+}; */
+

@@ -5,11 +5,11 @@ import {type Data } from './datatype';  // Make sure this path is correct
 
 const ApiResponseSchema = z.object({
     data: z.array(z.object({
-      type: z.string(),
-      id: z.string(),
-      attributes: z.object({
-        name: z.string(),
-        main_image_path: z.string().optional(),
+    type: z.string(),
+    id: z.string(),
+    attributes: z.object({
+    name: z.string(),
+    main_image_path: z.string().optional(),
         // Add more fields as necessary
       })
     }))

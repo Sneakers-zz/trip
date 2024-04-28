@@ -1,6 +1,6 @@
 // src/app/weather/page.tsx
 // Assuming the parent component file: src/app/someParentComponent.client.tsx
-'use client';
+
 import React from "react";
 import CityData from "../_components/CityData";  // No need for `?client` because the extension is enough
 

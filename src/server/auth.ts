@@ -6,9 +6,15 @@ import {
 } from "next-auth";
 import { type Adapter } from "next-auth/adapters";
 import GithubProvider from "next-auth/providers/github";
-
+import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "~/env";
 import { db } from "~/server/db";
+
+
+
+
+const envVarsToLog = ['NEXTAUTH_SECRET', 'GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET'];
+//logEnvironmentVariables(envVarsToLog);
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -45,13 +51,10 @@ export const authOptions: NextAuthOptions = {
         id: user.id,
       },
     }),
-  },
+  }, 
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
-    GithubProvider({
-      clientId: env.GITHUB_CLIENT_ID,
-      clientSecret: env.GITHUB_CLIENT_SECRET,
-    }),
+    
     /**
      * ...add more providers here.
      *
@@ -61,7 +64,33 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
+
+    /*CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        name: {
+          label: "Name",
+          type: "text",
+          placeholder: "Enter your name",
+        },
+      },
+      async authorize(credentials, _req) {
+        const user = { id: "1", name: credentials?.name ?? "J Smith" };
+        return user;
+      },
+    }), */
+  GithubProvider({
+    clientId: env.GITHUB_CLIENT_ID,
+    clientSecret: env.GITHUB_CLIENT_SECRET,
+  }),
   ],
+ /* secret: env.NEXTAUTH_SECRET,
+  session: {
+    strategy: "jwt",
+  },
+  jwt: {
+    // Optionally, you can define more detailed JWT configuration here
+  }, */
 };
 
 /**

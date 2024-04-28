@@ -40,7 +40,6 @@ export interface CropCardProps {
   crop: CropAttributes;
 }
 
-//crops
 export interface Crop {
   type: string;
   id: string;

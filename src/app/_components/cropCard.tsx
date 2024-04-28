@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+
 import React from 'react';
 import { type CropCardProps } from './datatype';
-
-
 
 const CropCard: React.FC<CropCardProps> = ({ crop }) => {
     return (

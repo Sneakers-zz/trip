@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import CropCard from './cropCard'; // Ensure this path is correct
@@ -11,10 +12,18 @@ export function CropFetcher() {
       enabled: false  // This prevents the query from running automatically
     });
 
-  const handleFetchCrops = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-   void  refetch(); // Manually trigger the query
-  }
+    const handleFetchCrops = (e: React.FormEvent<HTMLFormElement>): Promise<unknown> => {
+      e.preventDefault();
+      return refetch()  // Assuming refetch returns a promise.
+        .then(response => {
+          console.log('Data refetched successfully:', response);
+          return response;
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          throw error;  // Rethrow or handle the error as necessary.
+        });
+    }
 
   return (
     <>
@@ -38,7 +47,8 @@ export function CropFetcher() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
         {data?.length ? (
           data.map(item => (
-            <CropCard key={item.id} crop={item.attributes} />
+            
+            <CropCard key={item.id} crop={item.attributes}/>
           ))
         ) : (
           <p>No crops found or data is loading...</p>

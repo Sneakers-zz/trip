@@ -10,7 +10,13 @@ const ApiResponseSchema = z.object({
     attributes: z.object({
     name: z.string(),
     main_image_path: z.string().optional(),
-        // Add more fields as necessary
+    binomial_name: z.string().nullable(),
+    description: z.string().nullable(),
+    sun_requirements: z.string().nullable(), 
+    sowing_method: z.string().nullable(),
+    spread: z.number().nullable(),
+    row_spacing: z.number().nullable(),
+    height: z.number().nullable(),// Add more fields as necessary
       })
     }))
   });
@@ -28,8 +34,7 @@ export async function fetchCropsFromAPI(filter: string): Promise<ApiResponse> {
   return result;
 }
 
-
-export async function fetchWeather(headers: Record<string, string> = {}): Promise<Data> {
+export async function fetchWeather(): Promise<Data> {
   const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
   const lat = "48.42";
   const lon = "-123.36";
@@ -37,22 +42,7 @@ export async function fetchWeather(headers: Record<string, string> = {}): Promis
   const apiKey = process.env.OPENWEATHERAPI; // Ensure this is securely configured
   const url = `${baseUrl}?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
 
-  // Prepare headers
-  const defaultHeaders = new Headers({
-      "Cache-Control": "max-age=3600, immutable"
-  });
-
-  // Merge any additional headers provided
-  Object.entries(headers).forEach(([key, value]) => defaultHeaders.set(key, value));
-
-  const myInit: RequestInit = {
-      method: "GET",
-      headers: defaultHeaders,
-      mode: "cors",
-      //cache: "default" // Use a valid RequestCache value
-  };
-
-  const response = await fetch(url, myInit);
+  const response = await fetch(url);
   
   if (!response.ok) {
       throw new Error('Failed to fetch weather data');

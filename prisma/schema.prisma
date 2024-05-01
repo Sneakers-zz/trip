@@ -137,3 +137,22 @@ model SensorData {
   uvLight   Float
   createdAt DateTime @default(now())
 }
+
+model Weather {
+  id           Int    @id @default(autoincrement())
+  temp         Float
+  temp_min     Float
+  temp_max     Float
+  pressure     Int
+  humidity     Int
+  wind_speed   Int
+  wind_deg     Int
+  city_id      Int
+  city         String
+  country      String
+  lon          Float
+  lat          Float
+  weather_code Int
+  weather_icon String
+  createdAt DateTime @default(now())
+}

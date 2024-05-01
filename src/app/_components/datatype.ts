@@ -37,7 +37,15 @@ export interface CropAttributes {
 }
 
 export interface CropCardProps {
-  crop: CropAttributes;
+  main_image_path: string;
+  name: string;
+  binomial_name: string;
+  description: string;
+  sun_requirements: string;
+  sowing_method?: string;
+  spread: number;
+  row_spacing: number;
+  height: number;
 }
 
 export interface Crop {

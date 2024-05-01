@@ -45,15 +45,25 @@ export function CropFetcher() {
       </form>
       {error && <p className="text-red-500">Error fetching crops: {error.message}</p>}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-        {data?.length ? (
-          data.map(item => (
-            
-            <CropCard key={item.id} crop={item.attributes}/>
-          ))
-        ) : (
-          <p>No crops found or data is loading...</p>
-        )}
-      </div>
+    {data?.length ? (
+        data.map(item => (
+            <CropCard
+                key={item.id}
+                main_image_path={item.attributes.main_image_path ?? ''}
+                name={item.attributes.name ?? 'Unknown Name'}
+                binomial_name={item.attributes.binomial_name ?? 'Unknown Binomial Name'}
+                description={item.attributes.description ?? 'No description available'}
+                sun_requirements={item.attributes.sun_requirements ?? 'No sun requirements'}
+                sowing_method={item.attributes.sowing_method ?? 'Sowing method not specified'}
+                spread={item.attributes.spread ?? 0}
+                row_spacing={item.attributes.row_spacing ?? 0}
+                height={item.attributes.height ?? 0}
+            />
+        ))
+    ) : (
+        <p>No crops found or data is loading...</p>
+    )}
+</div>
     </>
   );  
 }

@@ -19,7 +19,7 @@ import { api } from "~/trpc/react";
     <>
     <form onSubmit={(e) => {
       e.preventDefault();
-      handleSubmit({
+     /* handleSubmit({
         chipId: 12,
         water1: 23,
         water2: 23,
@@ -27,9 +27,9 @@ import { api } from "~/trpc/react";
         water4: 0,
         tempC: 20.25,
         tempF: 68.45,
-        uvLight: 4.747,
+        uvLight: 4.747, 
     });
-    }}>
+    }}> */}}>
       <button type="submit" >Submit</button>  
       {error && <p>Error: {error.message}</p>}
     </form>

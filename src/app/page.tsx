@@ -1,15 +1,15 @@
-import { getServerAuthSession } from "~/server/auth";
-const session = await getServerAuthSession();
+import Navbar from "./_components/navBar";
+
 export default async function Home() {
   return (
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-          </p>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <p className="text-center text-2xl text-white">
-              {session && <span>Logged in as {session.user?.name}</span>}
-            </p>
-          </div>
-        </div>
+    <><Navbar /><div className="flex flex-col items-center gap-2">
+      <p className="text-2xl text-white">
+      </p>
+      <div className="flex flex-col items-center justify-center gap-4">
+        <p className="text-center text-2xl text-white">
+
+        </p>
+      </div>
+    </div></>
   );
 }

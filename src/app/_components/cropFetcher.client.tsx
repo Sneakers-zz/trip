@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import CropCard from './cropCard'; // Ensure this path is correct
@@ -16,7 +16,7 @@ export function CropFetcher() {
       e.preventDefault();
       return refetch()  // Assuming refetch returns a promise.
         .then(response => {
-          console.log('Data refetched successfully:', response);
+        //  console.log('Data refetched successfully:', response);
           return response;
         })
         .catch(error => {

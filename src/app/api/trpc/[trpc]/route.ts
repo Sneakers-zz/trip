@@ -20,10 +20,10 @@ const createContext = async (req: NextRequest) => {
 const handler = async (req: NextRequest) => {
   if (env.NODE_ENV === "development") {
     // Attempt to clone the request for logging purposes
-    const clonedRequest = req.clone();
+   // const clonedRequest = req.clone();
     try {
-      const body = await clonedRequest.json();
-      console.log(`Incoming request body: ${JSON.stringify(body)}`);
+    //  const body = await clonedRequest.json();
+   //   console.log(`Incoming request body: ${JSON.stringify(body)}`);
     } catch (err) {
       console.error("Failed to parse request body:", err);
     }

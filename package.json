@@ -20,6 +20,7 @@
     "@trpc/next": "next",
     "@trpc/react-query": "next",
     "@trpc/server": "next",
+    "date-fns": "^3.6.0",
     "express": "^4.19.2",
     "next": "^14.2.2",
     "next-auth": "^4.24.7",

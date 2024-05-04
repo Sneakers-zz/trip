@@ -5,6 +5,20 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'openweathermap.org',
+            pathname: '/img/w/**',
+          },
+        ],
+      },
+
+};
 
 export default config;
+
+// next.config.js
+

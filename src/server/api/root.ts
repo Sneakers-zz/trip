@@ -5,6 +5,7 @@ import { cropsRouter } from "~/server/api/routers/cropRouter"; // Ensure the imp
 import  {weatherRouter } from "~/server/api/routers/weatherRouter";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import {sensorDataRouter} from "./routers/sensorDataRouter";
+import { databaseRouter } from "./routers/databaseRouter";
 
 /**
  * This is the primary router for your server.
@@ -14,7 +15,8 @@ export const appRouter = createTRPCRouter({
     post:postRouter,
     crop:cropsRouter,
     weather:weatherRouter,
-    sensordata:sensorDataRouter}); // Ensure consistent formatting in namespaces
+    sensordata:sensorDataRouter,
+    dbdumpdata:databaseRouter}); // Ensure consistent formatting in namespaces
 
 
 // Export type definition of API

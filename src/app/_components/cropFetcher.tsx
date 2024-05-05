@@ -54,7 +54,7 @@ export function CropFetcher() {
           </>
         ) : data?.length ? (
           data.map((item) => (
-            <CropCard
+              <CropCard
                 key={item.id}
                 main_image_path={item.attributes.main_image_path ?? ''}
                 name={item.attributes.name ?? 'Unknown Name'}

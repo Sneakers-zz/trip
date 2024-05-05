@@ -1,5 +1,5 @@
 import React from 'react';
-import CityData from '../_components/CityData';
+import CityData from '../_components/cityData';
 import { api } from '~/trpc/server';
 
 type WeatherData = {

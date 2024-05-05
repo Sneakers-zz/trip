@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // apiClient.ts
 import { z } from 'zod';
-import {type Data } from './datatype';  // Make sure this path is correct
+import { type weatherData } from './weathertype';
 
 const ApiResponseSchema = z.object({
     data: z.array(z.object({
@@ -34,7 +34,7 @@ export async function fetchCropsFromAPI(filter: string): Promise<ApiResponse> {
   return result;
 }
 
-export async function fetchWeather(): Promise<Data> {
+export async function fetchWeather(): Promise<weatherData> {
   const baseUrl = "https://api.openweathermap.org/data/2.5/weather";
   const lat = "48.42";
   const lon = "-123.36";
@@ -48,6 +48,7 @@ export async function fetchWeather(): Promise<Data> {
       throw new Error('Failed to fetch weather data');
   }
 
-  const weatherData: Data = await response.json();
+  const weatherData: weatherData = await response.json();
   return weatherData;
 };
+

@@ -1,13 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 // src/server/trpc/router/weatherRouter.ts
 
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
 import { fetchWeather } from '~/app/_components/apiClient';
-import { PrismaClient } from '@prisma/client';
 import {  z } from 'zod';
 import { subHours } from 'date-fns';
-
+import { prisma } from "~/app/_components/prisma";
 
 
 const weatherinput = z.object({
@@ -29,7 +26,7 @@ const weatherinput = z.object({
   createdAt: z.date().default(() => new Date()), 
 });
 
-const prisma = new PrismaClient();
+
 export const weatherRouter = createTRPCRouter({
   fetchWeather: publicProcedure.query(() => {
     // Get current timestamp minus one hour

@@ -1,11 +1,10 @@
 // src/server/trpc/router/sensorDataRouter.ts
 import { z } from 'zod';
 import { createTRPCRouter, publicProcedure } from '~/server/api/trpc';
-import { PrismaClient } from '@prisma/client';
+
+import { prisma } from "~/app/_components/prisma";
 
 
-
-const prisma = new PrismaClient();
 // Initialize the router using createTRPCRouter if it's set up to do so without any arguments.
 const sensorInput = z.object({
     chipId: z.number(),
@@ -30,6 +29,7 @@ export const sensorDataRouter = createTRPCRouter({
       });
       return newSensorData; // Return the newly created sensor data entry
     }),
-});
+  });
+
 
 export default sensorDataRouter;

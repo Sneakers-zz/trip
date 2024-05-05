@@ -2,7 +2,7 @@
 // Assuming the parent component file: src/app/someParentComponent.client.tsx
 'use client';
 import React from "react";
-import {CropFetcher} from "../_components/cropFetcher.client";  // No need for `?client` because the extension is enough
+import {CropFetcher} from "../_components/cropFetcher";  // No need for `?client` because the extension is enough
 
 
 

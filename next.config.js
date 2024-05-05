@@ -13,6 +13,11 @@ const config = {
             hostname: 'openweathermap.org',
             pathname: '/img/w/**',
           },
+          {
+            protocol: "https",
+            hostname: "avatars.githubusercontent.com",
+            pathname: "/u/**",
+          },
         ],
       },
 

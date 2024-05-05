@@ -25,6 +25,7 @@ const weatherinput = z.object({
   lat: z.number(),
   weather_code: z.number(),
   weather_icon: z.string(),
+  weather_description: z.string(),
   createdAt: z.date().default(() => new Date()), 
 });
 
@@ -69,6 +70,7 @@ export const weatherRouter = createTRPCRouter({
             lat: weatherData.coord.lat,
             weather_code: weatherData.weather[0]?.id,
             weather_icon: weatherData.weather[0]?.icon,
+            weather_description: weatherData.weather[0]?.description,
             createdAt: new Date() // Current UTC timestamp
           });
 

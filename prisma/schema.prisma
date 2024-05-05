@@ -154,5 +154,6 @@ model Weather {
   lat          Float
   weather_code Int
   weather_icon String
+  weather_description String
   createdAt DateTime @default(now())
 }

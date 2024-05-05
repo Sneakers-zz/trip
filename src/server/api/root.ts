@@ -17,8 +17,6 @@ export const appRouter = createTRPCRouter({
     sensordata:sensorDataRouter}); // Ensure consistent formatting in namespaces
 
 
-
-
 // Export type definition of API
 export type AppRouter = typeof appRouter;
 export const createCaller = createCallerFactory(appRouter);

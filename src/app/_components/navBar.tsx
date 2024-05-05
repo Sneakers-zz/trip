@@ -1,5 +1,6 @@
-  // eslint-disable-next-line @next/next/no-img-element
+ 
 import Link from "next/link";
+import Image from "next/image";
 import { getServerAuthSession } from "~/server/auth";
 
 const Navbar: React.FC = async () => {
@@ -53,22 +54,29 @@ const Navbar: React.FC = async () => {
           </li>
         </div>
         <div className="hidden md:absolute md:inset-y-0 md:right-0 md:flex md:items-center md:justify-end">
-          <div className="inline-flex rounded-full shadow">
+      
             <div className="font-base inline-flex cursor-pointer items-center rounded-full border border-transparent bg-white px-4 py-2 text-base text-gray-900 hover:bg-gray-50 ">
             </div>
             {session ? (
-              <div>
-                <img
-                  src={session.user.image!}
-                  alt="Profile"
-                  style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-                />
-                <span>Logged in as {session.user?.name}</span>
+                        <div className="flex items-center gap-2">
+                        <Image
+                          src={session.user.image ?? ""}
+                          alt="Profile"
+                          width={50}
+                          height={50}
+                          className="rounded-full"
+                        />
+              <div className="flex flex-col">
+               
+                {session.user.email && <span className="text-sm text-gray-500">{session.user.email}</span>}
+                
+              </div>
+                <span> {session.user?.name}</span>
               </div>
             ) : (
               <span>No user is signed in</span>
             )}
-          </div>
+         
         </div>
       </nav>
     </div>

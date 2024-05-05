@@ -26,7 +26,10 @@ const CityData = memo(({ weatherData }: { weatherData: WeatherData }) => {
             width={100}
           />
         </div>
-
+        <div className="flex flex-col gap-5">
+        {weatherData.weather[0]?.description}
+        </div>
+       
         <div className="flex flex-col gap-5">
           <div className="text-6xl">{weatherData.main.temp}°C</div>
           <span className="text-gray-500">

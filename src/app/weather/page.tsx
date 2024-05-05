@@ -22,7 +22,8 @@ const WeatherPage = async () => {
     weather: [{
       id: rawWeatherData.weather_code,
       main: '',
-      description: '',
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      description:rawWeatherData.weather_description,
       icon: rawWeatherData.weather_icon,
     }],
     main: {

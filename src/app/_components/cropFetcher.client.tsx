@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import CropCard from './cropCard'; // Ensure this path is correct
+import SkeletonCropCard from "./skeletonCropCard";
 
 export function CropFetcher() {
   const [filter, setFilter] = useState("");
@@ -45,8 +46,14 @@ export function CropFetcher() {
       </form>
       {error && <p className="text-red-500">Error fetching crops: {error.message}</p>}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-    {data?.length ? (
-        data.map(item => (
+        {isLoading ? (
+          <>
+            <SkeletonCropCard />
+            <SkeletonCropCard />
+            <SkeletonCropCard />
+          </>
+        ) : data?.length ? (
+          data.map((item) => (
             <CropCard
                 key={item.id}
                 main_image_path={item.attributes.main_image_path ?? ''}

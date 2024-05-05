@@ -48,13 +48,7 @@ export interface CropCardProps {
   height: number;
 }
 
-export interface Crop {
-  type: string;
-  id: string;
-  attributes: CropAttributes;
-  links: CropLinks;
-  relationships: CropRelationships;
-}
+
 
 export interface CropAttributes {
   name: string;
@@ -172,4 +166,29 @@ export interface SensorData {
   "Temp C": number;
   "Temp F": number;
   Uvlight: number;
+}
+
+export interface Crop {
+  type: string;
+  id: string;
+  attributes: {
+    name: string;
+    binomial_name: string | null;
+    description: string | null;
+    sun_requirements: string | null;
+    sowing_method: string | null;
+    spread: number | null;
+    row_spacing: number | null;
+    height: number | null;
+    main_image_path?: string | undefined;
+    common_names?: string[];
+    guides_count?: number;
+    growing_degree_days?: number;
+    svg_icon?: string;
+    tags_array?: string[];
+    taxon?: string;
+    processing_pictures?: boolean;
+  };
+  links?: object;
+  relationships?: object;
 }

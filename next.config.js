@@ -18,6 +18,11 @@ const config = {
             hostname: "avatars.githubusercontent.com",
             pathname: "/u/**",
           },
+          {
+            protocol: 'https',
+            hostname: 's3.amazonaws.com',
+            pathname: '/openfarm-project/production/media/pictures/attachments/**',
+          },
         ],
       },
 

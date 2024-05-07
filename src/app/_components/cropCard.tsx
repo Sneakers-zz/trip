@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { type CropCardProps } from './croptype';
+import ImageWithFallback from './imageWithFallBack';
 
 
 
@@ -18,7 +19,14 @@ const CropCard: React.FC<CropCardProps> = ({
 }) => {
     return (
         <div className="bg-white shadow-lg rounded-lg overflow-hidden my-4">
-            <img src={main_image_path} alt={name} className="w-full h-56 object-cover object-center"/>
+                <ImageWithFallback
+                  src={main_image_path}
+                  alt={name}
+                  width={100}
+                  height={100}
+                  defaultSrc="/default-crop-image.jpg"
+                />
+           
             <div className="p-4">
                 <h3 className="font-bold text-xl mb-2">{name}</h3>
                 <div className="text-gray-800 mb-2">Biological Name: {binomial_name}</div>

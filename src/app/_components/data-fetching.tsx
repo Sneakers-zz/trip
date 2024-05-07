@@ -5,6 +5,7 @@ import { api } from "~/trpc/react";
 import "chartjs-adapter-date-fns";
 
 import { Chart, registerables } from "chart.js";
+import ImageWithFallback from "./imageWithFallBack";
 Chart.register(...registerables);
 
 const DataFetching: React.FC = () => {
@@ -51,14 +52,24 @@ const DataFetching: React.FC = () => {
 
       {/* Crops Planted */}
       <div className="crops-planted">
-        <h3>Crops Planted</h3>
-        <ul>
+      <h3>Crops Planted</h3>
+        <div className="flex flex-wrap">
           {cropsData?.map((crop) => (
-            <li key={crop.id}>
-              {crop.name} {crop.id ?? "Unknown Crop"}{" "}
-            </li>
+            <div key={crop.id} className="w-1/8 p-2">
+              <div>
+                {crop.name}
+                <ImageWithFallback
+                  src={crop.mainImagePath ?? ''}
+                  alt={crop.name ?? ''}
+                  width={100}
+                  height={100}
+                  defaultSrc="/default-crop-image.jpg"
+                />
+              </div>
+            </div>
           ))}
-        </ul>
+
+        </div>
       </div>
     </div>
   );

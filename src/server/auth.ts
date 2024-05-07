@@ -13,8 +13,7 @@ import { db } from "~/server/db";
 
 
 
-const envVarsToLog = ['NEXTAUTH_SECRET', 'GITHUB_CLIENT_ID', 'GITHUB_CLIENT_SECRET'];
-//logEnvironmentVariables(envVarsToLog);
+
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`

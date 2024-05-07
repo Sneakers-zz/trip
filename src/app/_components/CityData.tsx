@@ -1,5 +1,5 @@
 
-// src/app/_components/CityData.tsx
+// src/app/_components/cityData.tsx
 'use client';
 
 import React, { memo } from 'react';

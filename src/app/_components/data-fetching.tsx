@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Line } from "react-chartjs-2";
 import { api } from "~/trpc/react";
 import "chartjs-adapter-date-fns";
 

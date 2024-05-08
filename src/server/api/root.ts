@@ -16,7 +16,8 @@ export const appRouter = createTRPCRouter({
     crop:cropsRouter,
     weather:weatherRouter,
     sensordata:sensorDataRouter,
-    dbdumpdata:databaseRouter}); // Ensure consistent formatting in namespaces
+    dbdumpdata:databaseRouter,
+}); // Ensure consistent formatting in namespaces
 
 
 // Export type definition of API

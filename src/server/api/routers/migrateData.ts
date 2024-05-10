@@ -171,8 +171,8 @@ export async function migrateWeatherToSupabase()  {
     // Insert data into Supabase
     for (const data of mysqlData) {
       // Check if a record with the same id already exists
-      const existingRecordResponse = await supabase
-        .from("Crops")
+  /*   const existingRecordResponse = await supabase
+        .from("Crop")
         .select("*")
         .eq("id", data.id)
         .single();
@@ -183,19 +183,19 @@ export async function migrateWeatherToSupabase()  {
           existingRecordResponse.error,
         );
         continue;
-      }
+      } 
 
       const existingRecord = existingRecordResponse.data as {
         id: string;
-      } | null;
-
+      } | null; */
+const existingRecord = false;
       if (existingRecord) {
         // Record already exists, update it
         const updateResponse = await supabase
-          .from("Crops")
+          .from("Crop")
           .update({
+            id: data.id,
             name: data.name,
-            slug: data.slug,
             binomialName: data.binomialName,
             description: data.description,
             sunRequirements: data.sunRequirements,
@@ -206,7 +206,6 @@ export async function migrateWeatherToSupabase()  {
             guidesCount: data.guidesCount,
             mainImagePath: data.mainImagePath,
             taxon: data.taxon,
-            tagsArray: data.tagsArray,
             growingDegreeDays: data.growingDegreeDays,
             svgIcon: data.svgIcon,
           })
@@ -220,26 +219,27 @@ export async function migrateWeatherToSupabase()  {
         }
       } else {
         // Record doesn't exist, insert it
-        const insertResponse = await supabase.from("Crops").insert([
+        const insertResponse = await supabase.from("Crop").insert([
           {
             id: data.id,
             name: data.name,
-            slug: data.slug,
             binomialName: data.binomialName,
             description: data.description,
             sunRequirements: data.sunRequirements,
-            spread: data.spread,
+            sowingMethod: data.sowingMethod,
+            spread: data.spread, // Replace null with a default value (e.g., 0)
             rowSpacing: data.rowSpacing,
             height: data.height,
-            processingPictures: data.processingPictures,
-            guidesCount: data.guidesCount,
+            processingPictures: data.processingPictures, // Replace null with an empty string
+            guidesCount: data.guidesCount, // Replace null with a default value (e.g., 0)
             mainImagePath: data.mainImagePath,
-            taxon: data.taxon,
-            tagsArray: data.tagsArray,
-            growingDegreeDays: data.growingDegreeDays,
-            svgIcon: data.svgIcon,
+            taxon: data.taxon, // Replace null with an empty string
+            growingDegreeDays: data.growingDegreeDays, // Replace null with a default value (e.g., 0)
+            svgIcon: data.svgIcon, // Replace null with an empty string
           },
+          console.log(data)
         ]);
+        
 
         if (insertResponse.error) {
           console.error("Error inserting data:", insertResponse.error);

@@ -6,10 +6,10 @@ import { api } from "~/trpc/react";
   const { mutate, error } = api.sensordata.addSensorData.useMutation();  // Assuming `isFetching` is the correct property
 
   const handleSubmit = async (data: { chipId: number; water1: number; water2: number; water3: number; water4: number; tempC: number; tempF: number; uvLight: number; }) => {
-    console.log('Sending data:', data);  // Log the data before sending it   
+  //  console.log('Sending data:', data);  // Log the data before sending it   
     try {
       const response =  mutate(data); // Assuming `mutate` returns a promise
-      console.log('Response:', response);
+   //   console.log('Response:', response);
     } catch (err) {
       console.error('Error:', err);
     }

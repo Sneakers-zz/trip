@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import React from 'react';
 import CityData from '../_components/cityData';
 import { api } from '~/trpc/server';
@@ -19,13 +22,14 @@ const WeatherPage = async () => {
 
   // Transform the raw data into the expected structure
   const weatherData: WeatherData = {
-    weather: [{
-      id: rawWeatherData.weather_code,
-      main: '',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      description:rawWeatherData.weather_description,
-      icon: rawWeatherData.weather_icon,
-    }],
+    weather: [
+      {
+        id: rawWeatherData.weather_code,
+        main: "",
+        description: String(rawWeatherData.weather_description),
+        icon: rawWeatherData.weather_icon,
+      },
+    ],
     main: {
       temp: rawWeatherData.temp,
       temp_min: rawWeatherData.temp_min,

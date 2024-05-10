@@ -9,13 +9,13 @@ const DataPushing: React.FC = () => {
   
     const handleMigration = async () => {
       try {
-        console.log("Yopes, migration started!");
+       
         await migrateCropsToSupabase.mutateAsync();
-        console.log("Data Crop migration successful!");
+      
         await migrateSensorDataToSupabase.mutateAsync();
-        console.log("Data Sensor migration successful!");
+        
         await migrateWeatherToSupabase.mutateAsync();
-        console.log("Data weather migration successful!");
+       
       } catch (error) {
         console.error("Data migration failed:", error);
       }

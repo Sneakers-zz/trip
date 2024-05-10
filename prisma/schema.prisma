@@ -6,13 +6,11 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
-    // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
-    // Further reading:
-    // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
-    // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
-    url      = env("DATABASE_URL")
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
 }
+
 
 model Post {
     id        Int      @id @default(autoincrement())
@@ -87,42 +85,9 @@ model Crop {
   guidesCount        Int?           @map("guides_count")
   mainImagePath      String?        @map("main_image_path")
   taxon              String?
-  tagsArray          Json?         @map("tags_array") // Assuming your DB supports JSON.
   growingDegreeDays  Int?          @map("growing_degree_days")
   svgIcon            String ?       @map("svg_icon")
-  pictures           Picture[]
-  companions         Companion[]   @relation("CropCompanions")
-  commonNames        CommonName[]  // Explicitly define the relation to CommonName
-}
-
-model CommonName {
-  id     String @id @default(uuid())
-  name   String
-  cropId String
-  Crop   Crop   @relation(fields: [cropId], references: [id]) // Ensure this matches the Crop model's reference
-}
-
-model Picture {
-  id     String @id @default(uuid())
-  cropId String
-  Crop   Crop   @relation(fields: [cropId], references: [id])
-}
-
-model Companion {
-  id     String   @id @default(uuid())
-  cropId String
-  Crop   Crop[]   @relation("CropCompanions")
-}
-
-model Plant {
-  id             String   @id
-  image          String
-  name           String
-  botanicalName  String
-  sun            String?  // Made optional
-  spread         Int
-  rowSpace       Int
-  details        String
+ // Explicitly define the relation to CommonName
 }
 
 model SensorData {

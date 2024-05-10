@@ -1,17 +1,7 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import {
-  getServerSession,
-  type DefaultSession,
-  type NextAuthOptions,
-} from "next-auth";
-import { type Adapter } from "next-auth/adapters";
+
+import  { getServerSession,type DefaultSession, type NextAuthOptions, type Session } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
 import { env } from "~/env";
-import { db } from "~/server/db";
-
-
-
 
 
 
@@ -29,72 +19,41 @@ declare module "next-auth" {
       // role: UserRole;
     } & DefaultSession["user"];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
-export const authOptions: NextAuthOptions = {
-  callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-  }, 
-  adapter: PrismaAdapter(db) as Adapter,
-  providers: [
-    
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the GITHUB provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
 
-    /*CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        name: {
-          label: "Name",
-          type: "text",
-          placeholder: "Enter your name",
-        },
-      },
-      async authorize(credentials, _req) {
-        const user = { id: "1", name: credentials?.name ?? "J Smith" };
-        return user;
-      },
-    }), */
-  GithubProvider({
-    clientId: env.GITHUB_CLIENT_ID,
-    clientSecret: env.GITHUB_CLIENT_SECRET,
-  }),
+export const authOptions: NextAuthOptions = {
+ 
+  providers: [
+    GithubProvider({
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+    }),
+    
   ],
- /* secret: env.NEXTAUTH_SECRET,
-  session: {
-    strategy: "jwt",
+  callbacks: {
+    session: ({ session, user }) => {
+      console.log('session:', session);
+      console.log('user:', user);
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id, // Ensure `user.id` is actually provided by your user model in the database
+        },
+      };
+    },
   },
-  jwt: {
-    // Optionally, you can define more detailed JWT configuration here
-  }, */
 };
 
 /**
- * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
+ * Wrapper for `getServerSession` to simplify imports.
  *
- * @see https://next-auth.js.org/configuration/nextjs
+ * @param {NextApiRequest} req - The request object
+ * @param {NextApiResponse} res - The response object
+ * @returns {Promise<Session | null>} The session object or null
  */
-export const getServerAuthSession = () => getServerSession(authOptions);
+export const getServerAuthSession = async (
+): Promise<Session | null> => {
+  return getServerSession();
+};

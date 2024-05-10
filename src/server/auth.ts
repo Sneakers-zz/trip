@@ -24,22 +24,32 @@ declare module "next-auth" {
 
 export const authOptions: NextAuthOptions = {
  
+  session: {
+    strategy: "jwt",
+  },
+
   providers: [
     GithubProvider({
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     }),
-    
   ],
+  debug: true,
+  events: {
+    signIn: async ({ profile, account }) => {
+      console.log('profile:', profile);
+      console.log('account:', account);
+    },
+  },
   callbacks: {
-    session: ({ session, user }) => {
+    session: ({ session, token  }) => {
       console.log('session:', session);
-      console.log('user:', user);
+      console.log('user:', token );
       return {
         ...session,
         user: {
           ...session.user,
-          id: user.id, // Ensure `user.id` is actually provided by your user model in the database
+          id: token.sub , // Ensure `user.id` is actually provided by your user model in the database
         },
       };
     },

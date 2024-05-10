@@ -1,9 +1,9 @@
 
 import  { getServerSession,type DefaultSession, type NextAuthOptions, type Session } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import { env } from "~/env";
-
-
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { db } from "./db";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -27,13 +27,20 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-
+  adapter: PrismaAdapter(db),
   providers: [
-    GithubProvider({
-      clientId: env.GITHUB_CLIENT_ID,
-      clientSecret: env.GITHUB_CLIENT_SECRET,
-    }),
-  ],
+    
+      GoogleProvider({
+        clientId: process.env.GOOGLE_CLIENT_ID!,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      }),
+      GithubProvider({
+        clientId: process.env.GITHUB_ID!,
+        clientSecret: process.env.GITHUB_SECRET!,
+      }),
+      // ...add more providers here
+    ],
+
   debug: true,
   events: {
     signIn: async ({ profile, account }) => {
@@ -67,3 +74,4 @@ export const getServerAuthSession = async (
 ): Promise<Session | null> => {
   return getServerSession();
 };
+

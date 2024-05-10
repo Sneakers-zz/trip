@@ -23,6 +23,11 @@ const config = {
             hostname: 's3.amazonaws.com',
             pathname: '/openfarm-project/production/media/pictures/attachments/**',
           },
+          {
+            protocol: 'https',
+            hostname: 'lh3.googleusercontent.com',
+            pathname: '/a/**',
+          },
         ],
       },
 

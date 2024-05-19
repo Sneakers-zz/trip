@@ -34,8 +34,6 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 };
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  //  const { query } = req as unknown as { query: { cron: string } }; // Extract the cron path from the req.query;
-   // const { cron } = query as unknown as { cron: string };
     
   const { cron } = req.query;
     if (typeof cron !== 'string' || !Object.prototype.hasOwnProperty.call(tasks, cron)) {

@@ -1,7 +1,5 @@
 
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-
-
  const tasks: Record<string, () => void>   = {
   '1m': () => {
     console.log('Running task every minute');

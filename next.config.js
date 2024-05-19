@@ -35,7 +35,7 @@ const config = {
 };
 
 cron.schedule("* * * * *", () => {
-  console.log("Running a task every minute");
+ // console.log("Running a task every minute");
 })
 
 export default config;

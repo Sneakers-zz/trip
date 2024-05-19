@@ -4,6 +4,7 @@ import Loading from '../_components/loading';
 import DataPushing from '../_components/datareplicateSupabase';
 import DBCheck from '../_components/supabasedatabaseconnect';
 
+
 const DashboardPage: React.FC = () => {
   return (
 

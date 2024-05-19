@@ -1,10 +1,5 @@
 {
-  
-  "github": {
-    "autoJobCancelation": false
-  },
-  
-  "crons": [
+   "crons": [
     {
       "path": "/api/cron/1m",
       "schedule": "* * * * *"
@@ -34,5 +29,4 @@
       "schedule": "0 0 1 * *"
     }
   ]
-,
 }

@@ -13,7 +13,6 @@ if (!supabaseUrl || !supabaseKey) {
 }
 
 const supabase = createClient(supabaseUrl, supabaseKey);
-
 const listFiles = async (): Promise<FileObject[]> => {
   try {
     const { data, error } = await supabase.storage.from(bucketName).list('');

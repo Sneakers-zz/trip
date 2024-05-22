@@ -29,6 +29,11 @@ const config = {
             hostname: 'lh3.googleusercontent.com',
             pathname: '/a/**',
           },
+          {
+            protocol: 'https',
+            hostname: 'vwkbqjiuqcwevvsvazdz.supabase.co',
+            pathname: '/**',
+          },
         ],
       },
 
